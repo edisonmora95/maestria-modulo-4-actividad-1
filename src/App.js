@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import SearchBar from './components/searchBar';
 import './App.css';
 
-function App() {
+const App = () => {
+  const renderSearchBar = () => {
+    return (
+      <section className="row my-3">
+        <article className="col-12">
+          <SearchBar />
+        </article>
+      </section>
+    );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container">
+      {renderSearchBar()}
     </div>
   );
 }
