@@ -1,6 +1,7 @@
 import Navbar from './components/navbar';
 import SearchBar from './components/searchBar';
 import './App.css';
+import PostList from './components/postList';
 
 const App = () => {
   const renderNavbar = () => {
@@ -17,10 +18,15 @@ const App = () => {
     );
   };
 
+  const renderPostList = () => {
+    return <PostList />;
+  };
+
   return (
     <div className="App container">
       {renderNavbar()}
       {renderSearchBar()}
+      {renderPostList()}
     </div>
   );
 }
