@@ -23,11 +23,15 @@ const App = () => {
   };
 
   return (
-    <div className="App container">
-      {renderNavbar()}
-      {renderSearchBar()}
-      {renderPostList()}
-    </div>
+    <main>
+      <header>
+        {renderNavbar()}
+      </header>
+      <main className="App container">
+        {renderSearchBar()}
+        {renderPostList()}
+      </main>
+    </main>
   );
 }
 

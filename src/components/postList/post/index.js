@@ -23,8 +23,8 @@ const Post = () => {
     return (
       <article className="col-6" style={{ textAlign: 'right' }}>
         <button type="button" className="btn btn-danger">
-          <i class="bi-heart"></i>
-          43k
+          <i className="bi-heart"></i>
+          <span style={{ marginLeft: 5 }}>43k</span>
         </button>
       </article>
     );
@@ -49,8 +49,8 @@ const Post = () => {
   const renderComments = () => {
     return (
       <section style={{ textAlign: 'left' }} className="my-2">
-        <i class="bi-chat-right"></i>
-        <span>Comments (15)</span>
+        <i className="bi-chat-right"></i>
+        <span style={{ marginLeft: 5 }}>Comments (15)</span>
       </section>
     );
   };

@@ -6,10 +6,10 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            <i class="bi-lightning-charge-fill"></i>
+            <i className="bi-lightning-charge-fill"></i>
             <span>three pics</span>
           </a>
-          <i class="bi-person-circle"></i>
+          <i className="bi-person-circle"></i>
         </div>
       </nav>
     );
