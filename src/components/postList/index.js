@@ -1,16 +1,25 @@
 import React from 'react';
 import Post from './post';
 
-const PostList = () => {
-  const listLength = 5;
+const PostList = (props) => {
+  const {
+    posts = [],
+  } = props;
 
   const renderContent = () => {
-    const posts = Array(listLength).fill(1);
     return (
       <section className="row">
-        {posts.map((_, index) => {
-          return <article className="col-12 col-sm-6 col-md-4 my-2" key={`post=${index}`}>
-            <Post/>
+        {posts.map((post) => {
+          return <article className="col-12 col-sm-6 col-md-4 my-2" key={`post=${post.id}`}>
+            <Post
+              id={post.id}
+              img={post.img}
+              createdAt={post.createdAt}
+              likes={post.likes}
+              author={post.author}
+              description={post.description}
+              comments={post.comments}
+            />
           </article>
         })}
       </section>

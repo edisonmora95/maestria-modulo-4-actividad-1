@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
-const Post = () => {
+dayjs.extend(relativeTime);
+
+const Post = (props) => {
+  const {
+    img,
+    createdAt,
+    likes: postLikes,
+    author,
+    description,
+    comments,
+  } = props;
+
+  const time = dayjs(createdAt).fromNow();
+  const [likes] = useState(postLikes);
 
   const renderTimeAndLike = () => {
     return (
@@ -14,7 +29,7 @@ const Post = () => {
   const renderTime = () => {
     return (
       <article className="col-6" style={{ textAlign: 'left' }}>
-        <span>3min ago</span>
+        <span>{time}</span>
       </article>
     );
   };
@@ -24,7 +39,7 @@ const Post = () => {
       <article className="col-6" style={{ textAlign: 'right' }}>
         <button type="button" className="btn btn-danger">
           <i className="bi-heart"></i>
-          <span style={{ marginLeft: 5 }}>43k</span>
+          <span style={{ marginLeft: 5 }}>{likes}</span>
         </button>
       </article>
     );
@@ -33,7 +48,7 @@ const Post = () => {
   const renderAuthor = () => {
     return (
       <section style={{ textAlign: 'left' }} className="my-2">
-        <span style={{ fontWeight: 'bold' }}>@eric</span>
+        <span style={{ fontWeight: 'bold' }}>{author}</span>
       </section>
     );
   };
@@ -41,7 +56,7 @@ const Post = () => {
   const renderText = () => {
     return (
       <section>
-        <p className="card-text" style={{ textAlign: "justify" }}>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p className="card-text" style={{ textAlign: "justify" }}>{description}</p>
       </section>
     );
   };
@@ -50,7 +65,7 @@ const Post = () => {
     return (
       <section style={{ textAlign: 'left' }} className="my-2">
         <i className="bi-chat-right"></i>
-        <span style={{ marginLeft: 5 }}>Comments (15)</span>
+        <span style={{ marginLeft: 5 }}>Comments ({comments})</span>
       </section>
     );
   };
@@ -58,7 +73,7 @@ const Post = () => {
   const renderContent = () => {
     return (
       <main className="card">
-        <img src="https://i.pinimg.com/originals/07/d3/45/07d345396d4a96a46a1cacac42001635.jpg" alt="Logo"/>
+        <img src={img} alt="Logo"/>
         <section className="card-body">
           {renderTimeAndLike()}
           {renderAuthor()}

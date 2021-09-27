@@ -1,14 +1,26 @@
+import React, { Component } from 'react';
+
 import Navbar from './components/navbar';
 import SearchBar from './components/searchBar';
-import './App.css';
 import PostList from './components/postList';
 
-const App = () => {
-  const renderNavbar = () => {
-    return <Navbar />;
-  };
+import { posts } from './components/postList/posts';
 
-  const renderSearchBar = () => {
+import './App.css';
+
+class App extends Component {
+  constructor () {
+    super();
+    this.state = {
+      posts: posts,
+    };
+  }
+
+  renderNavbar () {
+    return <Navbar />;
+  }
+
+  renderSearchBar () {
     return (
       <section className="row my-3">
         <article className="col-12">
@@ -16,23 +28,30 @@ const App = () => {
         </article>
       </section>
     );
-  };
+  }
 
-  const renderPostList = () => {
-    return <PostList />;
-  };
+  renderPostList () {
+    const {
+      posts = [],
+    } = this.state;
 
-  return (
-    <main>
-      <header>
-        {renderNavbar()}
-      </header>
-      <main className="App container">
-        {renderSearchBar()}
-        {renderPostList()}
+    return <PostList posts={posts} />;
+  }
+
+  render () {
+    return (
+      <main>
+        <header>
+          {this.renderNavbar()}
+        </header>
+        <main className="App container">
+          {this.renderSearchBar()}
+          {this.renderPostList()}
+        </main>
       </main>
-    </main>
-  );
+    );
+  }
+
 }
 
 export default App;
