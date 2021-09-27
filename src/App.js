@@ -14,17 +14,22 @@ class App extends Component {
   constructor () {
     super();
     this.state = {
-      posts: posts,
+      posts: [],
       searchValue: "",
       loadedPosts: false,
       section: "posts",
     };
     this.onSearch = this.onSearch.bind(this);
+    this.onProfileClick = this.onProfileClick.bind(this);
+    this.onLogoClick = this.onLogoClick.bind(this);
   }
 
   componentDidMount () {
     setTimeout(() => {
-      this.setState({ loadedPosts: true });
+      this.setState({
+        loadedPosts: true,
+        posts: posts,
+      });
     }, 3000);
   }
 
@@ -34,8 +39,16 @@ class App extends Component {
     this.setState({ posts: filteredPosts });
   }
 
+  onProfileClick () {
+    this.setState({ section: "profile", posts: [] });
+  }
+
+  onLogoClick () {
+    this.setState({ section: "posts", posts: [] });
+  }
+
   renderNavbar () {
-    return <Navbar />;
+    return <Navbar onLogoClick={this.onLogoClick} onProfileClick={this.onProfileClick} />;
   }
 
   renderSearchBar () {
