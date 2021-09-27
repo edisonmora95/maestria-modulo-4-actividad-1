@@ -5,7 +5,8 @@ import SearchBar from './components/searchBar';
 import PostList from './components/postList';
 import Profile from './components/profile';
 
-import { posts } from './components/postList/posts';
+import { posts } from './data/posts';
+import { profile } from './data/profile';
 
 import './App.css';
 
@@ -64,9 +65,7 @@ class App extends Component {
   }
 
   renderProfile () {
-    const avatar = "https://gravatar.com/avatar/9cdf3d945a11fed3ad9db98893d54392?s=400&d=robohash&r=x";
-    const username = "edisonmora";
-    const bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    const { avatar, username, bio } = profile;
     return (
       <section className="row my-3">
         <Profile
