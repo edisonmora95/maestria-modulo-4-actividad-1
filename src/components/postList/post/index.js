@@ -15,7 +15,18 @@ const Post = (props) => {
   } = props;
 
   const time = dayjs(createdAt).fromNow();
-  const [likes] = useState(postLikes);
+  const [likes, setLikes] = useState(postLikes);
+  const [likeBtnClicked, setLikeBtnClicked] = useState(false);
+
+  const onLikeBtnClick = () => {
+    if (likeBtnClicked) {
+      setLikes(likes - 1);
+      setLikeBtnClicked(false);
+      return;
+    }
+    setLikes(likes + 1);
+    setLikeBtnClicked(true);
+  };
 
   const renderTimeAndLike = () => {
     return (
@@ -37,7 +48,7 @@ const Post = (props) => {
   const renderLikeBtn = () => {
     return (
       <article className="col-6" style={{ textAlign: 'right' }}>
-        <button type="button" className="btn btn-danger">
+        <button type="button" className="btn btn-danger" onClick={onLikeBtnClick}>
           <i className="bi-heart"></i>
           <span style={{ marginLeft: 5 }}>{likes}</span>
         </button>
