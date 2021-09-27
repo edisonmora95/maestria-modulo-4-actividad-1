@@ -14,8 +14,15 @@ class App extends Component {
     this.state = {
       posts: posts,
       searchValue: "",
+      loadedPosts: false,
     };
     this.onSearch = this.onSearch.bind(this);
+  }
+
+  componentDidMount () {
+    setTimeout(() => {
+      this.setState({ loadedPosts: true });
+    }, 3000);
   }
 
   onSearch (value) {
@@ -42,7 +49,14 @@ class App extends Component {
   renderPostList () {
     const {
       posts = [],
+      loadedPosts = false,
     } = this.state;
+
+    if (!loadedPosts) {
+      return (
+        <p>Loading...</p>
+      );
+    }
 
     return <PostList posts={posts} />;
   }
