@@ -13,7 +13,15 @@ class App extends Component {
     super();
     this.state = {
       posts: posts,
+      searchValue: "",
     };
+    this.onSearch = this.onSearch.bind(this);
+  }
+
+  onSearch (value) {
+    this.setState({ searchValue: value });
+    const filteredPosts = posts.filter((post) => post.description.toLowerCase().includes(value.toLowerCase()));
+    this.setState({ posts: filteredPosts });
   }
 
   renderNavbar () {
@@ -21,10 +29,11 @@ class App extends Component {
   }
 
   renderSearchBar () {
+    const { searchValue } = this.state;
     return (
       <section className="row my-3">
         <article className="col-12">
-          <SearchBar />
+          <SearchBar onSearch={this.onSearch} value={searchValue}/>
         </article>
       </section>
     );
