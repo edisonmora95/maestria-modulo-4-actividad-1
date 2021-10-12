@@ -15,6 +15,9 @@ class Login extends Component {
     this.onLoginClick = this.onLoginClick.bind(this);
   }
   async onLoginClick(e) {
+    const {
+      onLoginComplete,
+    } = this.props;
     e.preventDefault();
     try {
       this.setState({ loading: true });
@@ -22,6 +25,7 @@ class Login extends Component {
       const password = e.target.password.value;
       await login(username, password);
       this.setState({ message: '', error: false, loading: false });
+      onLoginComplete();
     } catch (error) {
       this.setState({ message: error.message, error: true, loading: false });
     }

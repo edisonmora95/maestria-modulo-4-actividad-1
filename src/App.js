@@ -4,9 +4,12 @@ import Navbar from './components/navbar';
 import SearchBar from './components/searchBar';
 import PostList from './components/postList';
 import Profile from './components/profile';
+import Login from './components/login';
 
 import { posts } from './data/posts';
 import { profile } from './data/profile';
+
+import './plugins/axios';
 
 import './App.css';
 
@@ -18,10 +21,12 @@ class App extends Component {
       searchValue: "",
       loadedPosts: false,
       section: "posts",
+      loginOk: false,
     };
     this.onSearch = this.onSearch.bind(this);
     this.onProfileClick = this.onProfileClick.bind(this);
     this.onLogoClick = this.onLogoClick.bind(this);
+    this.onLoginComplete = this.onLoginComplete.bind(this);
   }
 
   componentDidMount () {
@@ -45,6 +50,10 @@ class App extends Component {
 
   onLogoClick () {
     this.setState({ section: "posts", posts: [] });
+  }
+
+  onLoginComplete() {
+    this.setState({ loginOk: true });
   }
 
   renderNavbar () {
@@ -91,7 +100,13 @@ class App extends Component {
   }
 
   renderMainContent () {
-    const { section } = this.state;
+    const { section, loginOk } = this.state;
+
+    if (!loginOk) {
+      return (
+        <Login onLoginComplete={this.onLoginComplete} />
+      );
+    }
 
     if (section === "posts") {
       return (
