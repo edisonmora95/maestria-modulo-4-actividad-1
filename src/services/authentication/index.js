@@ -20,7 +20,20 @@ export const login = async (username, password) => {
     }
     const response = await axios.post(url, body);
     saveUserToLocalStorage(response.data);
-    return response;
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error.data);
+  }
+};
+
+/**
+ * @param {string} userId
+ */
+export const getLoggedUser = async (userId) => {
+  try {
+    const url = `${BASE_URL}/api/users/${userId}`;
+    const response = await axios.get(url);
+    return response.data;
   } catch (error) {
     return Promise.reject(error.data);
   }

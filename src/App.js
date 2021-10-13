@@ -12,6 +12,7 @@ import { profile } from './data/profile';
 import './plugins/axios';
 
 import './App.css';
+import { getLoggedUser } from './services/authentication';
 
 class App extends Component {
   constructor () {
@@ -29,7 +30,20 @@ class App extends Component {
     this.onLoginComplete = this.onLoginComplete.bind(this);
   }
 
-  componentDidMount () {
+  async componentDidMount () {
+    const userId = localStorage.getItem('user-id');
+    if (userId) {
+      try {
+        await getLoggedUser(userId);
+        this.setState({ loginOk: true });
+        this.loadPosts();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  loadPosts() {
     setTimeout(() => {
       this.setState({
         loadedPosts: true,
@@ -54,6 +68,7 @@ class App extends Component {
 
   onLoginComplete() {
     this.setState({ loginOk: true });
+    this.loadPosts();
   }
 
   renderNavbar () {
