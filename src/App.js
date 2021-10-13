@@ -13,6 +13,7 @@ import './plugins/axios';
 
 import './App.css';
 import { getLoggedUser } from './services/authentication';
+import { getUserId } from './services/localStorage';
 
 class App extends Component {
   constructor () {
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    const userId = localStorage.getItem('user-id');
+    const userId = getUserId();
     if (userId) {
       try {
         await getLoggedUser(userId);

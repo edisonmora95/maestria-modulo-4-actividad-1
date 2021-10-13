@@ -1,11 +1,7 @@
 import axios from 'axios'
+import { setUserId } from '../localStorage';
 
 const BASE_URL = 'https://three-points.herokuapp.com';
-
-const saveUserToLocalStorage = (user = {}) => {
-  const { id = '' } = user;
-  localStorage.setItem('user-id', id);
-};
 
 /**
  * @param {string} username
@@ -19,7 +15,8 @@ export const login = async (username, password) => {
       password,
     }
     const response = await axios.post(url, body);
-    saveUserToLocalStorage(response.data);
+    const { id = '' } = response.data;
+    setUserId(id);
     return response.data;
   } catch (error) {
     return Promise.reject(error.data);
