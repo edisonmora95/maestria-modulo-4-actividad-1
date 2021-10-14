@@ -1,38 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useState } from 'react/cjs/react.development';
+
 import { login } from '../../services/authentication';
 
 import './login.css';
 
-class Login extends Component {
+const Login = (props) => {
+  const {
+    onLoginComplete,
+  } = props;
 
-  constructor() {
-    super();
-    this.state = {
-      error: false,
-      message: '',
-      loading: false,
-    };
-    this.onLoginClick = this.onLoginClick.bind(this);
-  }
-  async onLoginClick(e) {
-    const {
-      onLoginComplete,
-    } = this.props;
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const onLoginClick = async (e) => {
     e.preventDefault();
     try {
-      this.setState({ loading: true });
+      setLoading(true);
       const username = e.target.email.value;
       const password = e.target.password.value;
       await login(username, password);
-      this.setState({ message: '', error: false, loading: false });
+      setLoading(false);
+      setError(false);
+      setMessage('');
       onLoginComplete();
     } catch (error) {
-      this.setState({ message: error.message, error: true, loading: false });
+      setLoading(false);
+      setError(true);
+      setMessage(error.message);
     }
   }
 
-  renderError() {
-    const { error, message } = this.state;
+  const renderError = () => {
     if (!error) {
       return null;
     }
@@ -43,27 +43,24 @@ class Login extends Component {
     );
   }
 
-  render() {
-    const { loading } = this.state;
-    return (
-      <main className="row login-main" onSubmit={this.onLoginClick}>
-        {this.renderError()}
-        <form className="col-10 col-lg-4 col-md-4">
-          <section className="mt-3">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input type="text" name="email" className="form-control" id="email" placeholder="name@example.com" />
-          </section>
-          <section className="mt-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input type="password" name="password" className="form-control" id="password" />
-          </section>
-          <section className="mt-3 d-grid gap-2">
-            <button type="submit" className="btn btn-primary" disabled={loading}>Login</button>
-          </section>
-        </form>
-      </main>
-    );
-  }
+  return (
+    <main className="row login-main" onSubmit={onLoginClick}>
+      {renderError()}
+      <form className="col-10 col-lg-4 col-md-4">
+        <section className="mt-3">
+          <label htmlFor="email" className="form-label">Email</label>
+          <input type="text" name="email" className="form-control" id="email" placeholder="name@example.com" />
+        </section>
+        <section className="mt-3">
+          <label htmlFor="password" className="form-label">Password</label>
+          <input type="password" name="password" className="form-control" id="password" />
+        </section>
+        <section className="mt-3 d-grid gap-2">
+          <button type="submit" className="btn btn-primary" disabled={loading}>Login</button>
+        </section>
+      </form>
+    </main>
+  );
 };
 
 export default Login;

@@ -14,6 +14,7 @@ import './plugins/axios';
 import './App.css';
 import { getLoggedUser } from './services/authentication';
 import { getUserId } from './services/localStorage';
+import { Route, Switch, withRouter } from 'react-router';
 
 class App extends Component {
   constructor () {
@@ -36,11 +37,14 @@ class App extends Component {
     if (userId) {
       try {
         await getLoggedUser(userId);
-        this.setState({ loginOk: true });
+        this.props.history.push('/');
         this.loadPosts();
       } catch (error) {
         console.log(error);
+        this.props.history.push('/login');
       }
+    } else {
+      this.props.history.push('/login');
     }
   }
 
@@ -68,7 +72,7 @@ class App extends Component {
   }
 
   onLoginComplete() {
-    this.setState({ loginOk: true });
+    this.props.history.push('/');
     this.loadPosts();
   }
 
@@ -116,26 +120,22 @@ class App extends Component {
   }
 
   renderMainContent () {
-    const { section, loginOk } = this.state;
-
-    if (!loginOk) {
-      return (
-        <Login onLoginComplete={this.onLoginComplete} />
-      );
-    }
-
-    if (section === "posts") {
-      return (
-        <div>
-          {this.renderSearchBar()}
-          {this.renderPostList()}
-        </div>
-      );
-    }
-
     return (
       <div>
-        {this.renderProfile()}
+        <Switch>
+          <Route path="/login">
+            <Login onLoginComplete={this.onLoginComplete} />
+          </Route>
+          <Route path="/profile">
+            {this.renderProfile()}
+          </Route>
+          <Route path="/">
+            <div>
+              {this.renderSearchBar()}
+              {this.renderPostList()}
+            </div>
+          </Route>
+        </Switch>
       </div>
     );
   }
@@ -155,4 +155,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default withRouter(App);
