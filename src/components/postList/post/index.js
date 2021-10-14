@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+import { likePost } from '../../../services/posts';
+
 dayjs.extend(relativeTime);
 
 const Post = (props) => {
@@ -12,20 +14,26 @@ const Post = (props) => {
     author,
     description,
     comments,
+    id,
   } = props;
 
   const time = dayjs(createdAt).fromNow();
   const [likes, setLikes] = useState(postLikes);
   const [likeBtnClicked, setLikeBtnClicked] = useState(false);
 
-  const onLikeBtnClick = () => {
-    if (likeBtnClicked) {
-      setLikes(likes - 1);
-      setLikeBtnClicked(false);
-      return;
+  const onLikeBtnClick = async () => {
+    try {
+      if (likeBtnClicked) {
+        setLikes(likes - 1);
+        setLikeBtnClicked(false);
+        return;
+      }
+      setLikes(likes + 1);
+      setLikeBtnClicked(true);
+      await likePost(id);
+    } catch (error) {
+      console.log(error);
     }
-    setLikes(likes + 1);
-    setLikeBtnClicked(true);
   };
 
   const renderTimeAndLike = () => {

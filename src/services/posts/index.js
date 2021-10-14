@@ -11,3 +11,16 @@ export const getPosts = async () => {
     return Promise.reject(error.data);
   }
 };
+
+/**
+ * @param {string} postId
+ */
+export const likePost = async (postId) => {
+  try {
+    const url = `${BASE_URL}/api/posts/${postId}/like`;
+    const response = await axios.post(url);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error.data);
+  }
+};
