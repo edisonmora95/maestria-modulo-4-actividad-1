@@ -8,3 +8,7 @@ export const setUserId = (id) => {
 export const getUserId = () => {
   return localStorage.getItem('userId');
 };
+
+export const removeUserId = () => {
+  localStorage.removeItem('userId');
+};
