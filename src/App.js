@@ -25,6 +25,7 @@ class App extends Component {
       loadedPosts: false,
       section: "posts",
       loginOk: false,
+      currentUser: {},
     };
     this.onSearch = this.onSearch.bind(this);
     this.onProfileClick = this.onProfileClick.bind(this);
@@ -36,7 +37,8 @@ class App extends Component {
     const userId = getUserId();
     if (userId) {
       try {
-        await getLoggedUser(userId);
+        const user = await getLoggedUser(userId);
+        this.setState({ currentUser: user });
         this.props.history.push('/');
         this.loadPosts();
       } catch (error) {
@@ -64,11 +66,11 @@ class App extends Component {
   }
 
   onProfileClick () {
-    this.setState({ section: "profile", posts: [] });
+    this.props.history.push('/profile');
   }
 
   onLogoClick () {
-    this.setState({ section: "posts", posts: [] });
+    this.props.history.push('/');
   }
 
   onLoginComplete() {
@@ -107,7 +109,9 @@ class App extends Component {
   }
 
   renderProfile () {
-    const { avatar, username, bio } = profile;
+    const {
+      currentUser: { avatar, username, bio } = {},
+    } = this.state;
     return (
       <section className="row my-3">
         <Profile
