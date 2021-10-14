@@ -13,12 +13,12 @@ const PostList = (props) => {
           return <article className="col-12 col-sm-6 col-md-4 my-2" key={`post=${post.id}`}>
             <Post
               id={post.id}
-              img={post.img}
+              img={post.image}
               createdAt={post.createdAt}
               likes={post.likes}
               author={post.author}
-              description={post.description}
-              comments={post.comments}
+              description={post.text}
+              comments={post.comments.length}
             />
           </article>
         })}

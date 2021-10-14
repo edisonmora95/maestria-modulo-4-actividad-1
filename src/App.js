@@ -6,14 +6,13 @@ import PostList from './components/postList';
 import Profile from './components/profile';
 import Login from './components/login';
 
-import { posts } from './data/posts';
-
 import './plugins/axios';
 
 import './App.css';
 import { getLoggedUser } from './services/authentication';
 import { getUserId } from './services/localStorage';
 import { Route, Switch, withRouter } from 'react-router';
+import { getPosts } from './services/posts';
 
 class App extends Component {
   constructor () {
@@ -49,19 +48,13 @@ class App extends Component {
     }
   }
 
-  loadPosts() {
-    setTimeout(() => {
-      this.setState({
-        loadedPosts: true,
-        posts: posts,
-      });
-    }, 3000);
+  async loadPosts() {
+    const posts = await getPosts();
+    this.setState({ posts, loadedPosts: true });
   }
 
   onSearch (value) {
     this.setState({ searchValue: value });
-    const filteredPosts = posts.filter((post) => post.description.toLowerCase().includes(value.toLowerCase()));
-    this.setState({ posts: filteredPosts });
   }
 
   onProfileClick () {
@@ -95,6 +88,7 @@ class App extends Component {
   renderPostList () {
     const {
       posts = [],
+      searchValue,
       loadedPosts = false,
     } = this.state;
 
@@ -104,7 +98,12 @@ class App extends Component {
       );
     }
 
-    return <PostList posts={posts} />;
+    let filteredPosts = [...posts];
+    if (searchValue) {
+      filteredPosts = filteredPosts.filter((p) => p.text.toLowerCase().includes(searchValue.toLowerCase()));
+    }
+
+    return <PostList posts={filteredPosts} />;
   }
 
   renderProfile () {

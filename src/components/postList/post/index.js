@@ -6,7 +6,7 @@ dayjs.extend(relativeTime);
 
 const Post = (props) => {
   const {
-    img,
+    img = 'http://placeimg.com/640/480',
     createdAt,
     likes: postLikes,
     author,
@@ -59,7 +59,7 @@ const Post = (props) => {
   const renderAuthor = () => {
     return (
       <section style={{ textAlign: 'left' }} className="my-2">
-        <span style={{ fontWeight: 'bold' }}>{author}</span>
+        <span style={{ fontWeight: 'bold' }}>{author.name}</span>
       </section>
     );
   };
