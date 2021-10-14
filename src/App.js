@@ -36,8 +36,7 @@ class App extends Component {
     const userId = getUserId();
     if (userId) {
       try {
-        const user = await getLoggedUser(userId);
-        this.setState({ currentUser: user });
+        await this.getUser(userId);
         this.props.history.push('/');
         this.loadPosts();
       } catch (error) {
@@ -47,6 +46,11 @@ class App extends Component {
     } else {
       this.props.history.push('/login');
     }
+  }
+
+  async getUser(userId) {
+    const user = await getLoggedUser(userId);
+    this.setState({ currentUser: user });
   }
 
   async loadPosts() {
@@ -70,9 +74,20 @@ class App extends Component {
     this.props.history.push('/');
   }
 
-  onLoginComplete() {
-    this.props.history.push('/');
-    this.loadPosts();
+  async onLoginComplete() {
+    const userId = getUserId();
+    if (userId) {
+      try {
+        await this.getUser(userId);
+        this.props.history.push('/');
+        this.loadPosts();
+      } catch (error) {
+        console.log(error);
+        this.props.history.push('/login');
+      }
+    } else {
+      this.props.history.push('/login');
+    }
   }
 
   renderNavbar () {
