@@ -7,7 +7,6 @@ import Profile from './components/profile';
 import Login from './components/login';
 
 import { posts } from './data/posts';
-import { profile } from './data/profile';
 
 import './plugins/axios';
 

@@ -1,7 +1,11 @@
 import axios from 'axios'
-import { setUserId } from '../localStorage';
 
-const BASE_URL = 'https://three-points.herokuapp.com';
+import { setUserId } from '../localStorage';
+import {
+  BASE_URL,
+  LOGIN,
+  GET_LOGGED_USER,
+} from '../routes';
 
 /**
  * @param {string} username
@@ -9,7 +13,7 @@ const BASE_URL = 'https://three-points.herokuapp.com';
  */
 export const login = async (username, password) => {
   try {
-    const url = `${BASE_URL}/api/login`;
+    const url = `${BASE_URL}${LOGIN}`;
     const body = {
       username,
       password,
@@ -28,7 +32,7 @@ export const login = async (username, password) => {
  */
 export const getLoggedUser = async (userId) => {
   try {
-    const url = `${BASE_URL}/api/users/${userId}`;
+    const url = `${BASE_URL}${GET_LOGGED_USER}${userId}`;
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
