@@ -29,6 +29,7 @@ class App extends Component {
     this.onProfileClick = this.onProfileClick.bind(this);
     this.onLogoClick = this.onLogoClick.bind(this);
     this.onLoginComplete = this.onLoginComplete.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
 
   async componentDidMount () {
@@ -51,6 +52,10 @@ class App extends Component {
   async loadPosts() {
     const posts = await getPosts();
     this.setState({ posts, loadedPosts: true });
+  }
+
+  onLogout () {
+    this.setState({ currentUser: {} });
   }
 
   onSearch (value) {
@@ -116,6 +121,7 @@ class App extends Component {
           avatar={avatar}
           username={username}
           bio={bio}
+          onLogout={this.onLogout}
         />
       </section>
     );

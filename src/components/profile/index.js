@@ -1,4 +1,6 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+import { logout } from '../../services/authentication';
 
 import './profile.css';
 
@@ -7,7 +9,20 @@ const Profile = (props) => {
     avatar,
     username,
     bio,
+    onLogout,
   } = props;
+
+  const history = useHistory();
+
+  const onLogoutClick = async () => {
+    try {
+      await logout();
+      history.push("/login");
+      onLogout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderContent = () => {
     return(
@@ -20,6 +35,9 @@ const Profile = (props) => {
         </section>
         <section className="my-3 px-3">
           <p>{bio}</p>
+        </section>
+        <section>
+          <button onClick={onLogoutClick} type="button" class="btn btn-link">Salir</button>
         </section>
       </main>
     );
