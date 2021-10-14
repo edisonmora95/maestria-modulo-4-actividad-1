@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/maestria-modulo-4-actividad-1/static/css/main.6cc12918.chunk.css",
-    "main.js": "/maestria-modulo-4-actividad-1/static/js/main.582c462e.chunk.js",
-    "main.js.map": "/maestria-modulo-4-actividad-1/static/js/main.582c462e.chunk.js.map",
-    "runtime-main.js": "/maestria-modulo-4-actividad-1/static/js/runtime-main.9f4c3527.js",
-    "runtime-main.js.map": "/maestria-modulo-4-actividad-1/static/js/runtime-main.9f4c3527.js.map",
-    "static/js/2.64ebffd9.chunk.js": "/maestria-modulo-4-actividad-1/static/js/2.64ebffd9.chunk.js",
-    "static/js/2.64ebffd9.chunk.js.map": "/maestria-modulo-4-actividad-1/static/js/2.64ebffd9.chunk.js.map",
-    "static/js/3.1017028c.chunk.js": "/maestria-modulo-4-actividad-1/static/js/3.1017028c.chunk.js",
-    "static/js/3.1017028c.chunk.js.map": "/maestria-modulo-4-actividad-1/static/js/3.1017028c.chunk.js.map",
+    "main.js": "/maestria-modulo-4-actividad-1/static/js/main.8fdb6a80.chunk.js",
+    "main.js.map": "/maestria-modulo-4-actividad-1/static/js/main.8fdb6a80.chunk.js.map",
+    "runtime-main.js": "/maestria-modulo-4-actividad-1/static/js/runtime-main.26e2ad89.js",
+    "runtime-main.js.map": "/maestria-modulo-4-actividad-1/static/js/runtime-main.26e2ad89.js.map",
+    "static/js/2.431f6bcb.chunk.js": "/maestria-modulo-4-actividad-1/static/js/2.431f6bcb.chunk.js",
+    "static/js/2.431f6bcb.chunk.js.map": "/maestria-modulo-4-actividad-1/static/js/2.431f6bcb.chunk.js.map",
+    "static/js/3.dcbd9fc8.chunk.js": "/maestria-modulo-4-actividad-1/static/js/3.dcbd9fc8.chunk.js",
+    "static/js/3.dcbd9fc8.chunk.js.map": "/maestria-modulo-4-actividad-1/static/js/3.dcbd9fc8.chunk.js.map",
     "index.html": "/maestria-modulo-4-actividad-1/index.html",
     "static/css/main.6cc12918.chunk.css.map": "/maestria-modulo-4-actividad-1/static/css/main.6cc12918.chunk.css.map",
-    "static/js/2.64ebffd9.chunk.js.LICENSE.txt": "/maestria-modulo-4-actividad-1/static/js/2.64ebffd9.chunk.js.LICENSE.txt"
+    "static/js/2.431f6bcb.chunk.js.LICENSE.txt": "/maestria-modulo-4-actividad-1/static/js/2.431f6bcb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9f4c3527.js",
-    "static/js/2.64ebffd9.chunk.js",
+    "static/js/runtime-main.26e2ad89.js",
+    "static/js/2.431f6bcb.chunk.js",
     "static/css/main.6cc12918.chunk.css",
-    "static/js/main.582c462e.chunk.js"
+    "static/js/main.8fdb6a80.chunk.js"
   ]
 }
